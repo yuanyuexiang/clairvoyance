@@ -24,3 +24,7 @@ _testmain.go
 *.test
 *.prof
 
+exodus.mp4
+output.ivf
+output.ogg
+sdp.txt
