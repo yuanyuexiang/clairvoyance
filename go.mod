@@ -1,6 +1,6 @@
 module play-from-disk
 
-go 1.22.2
+go 1.22.7
 
 require (
 	github.com/pion/mediadevices v0.6.4
@@ -31,8 +31,8 @@ require (
 	github.com/stretchr/testify v1.9.0 // indirect
 	github.com/wlynxg/anet v0.0.3 // indirect
 	golang.org/x/crypto v0.28.0 // indirect
-	golang.org/x/image v0.15.0 // indirect
-	golang.org/x/net v0.29.0 // indirect
+	golang.org/x/image v0.21.0 // indirect
+	golang.org/x/net v0.30.0 // indirect
 	golang.org/x/sys v0.26.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
