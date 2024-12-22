@@ -39,6 +39,10 @@ jobs:
       - name: 目录文件
         run: ls -l
 
+    outputs:
+      output1: Dockerfile
+      output2: clairvoyance
+
   build-2:
     needs: build
     name: 构建镜像
