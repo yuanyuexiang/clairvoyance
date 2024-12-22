@@ -24,7 +24,7 @@ jobs:
       # 构建项目
       - name: 构建程序
         #run: pwd & ls -l
-        run: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o play-from-disk -ldflags="-s -w" .
+        run: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o clairvoyance -ldflags="-s -w" .
  
       - name: 目录文件
         run: ls -l
@@ -33,7 +33,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ vars.DOCKER_USERNAME }}/play-from-disk
+          images: ${{ vars.DOCKER_USERNAME }}/clairvoyance
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3

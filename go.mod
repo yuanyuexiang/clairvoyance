@@ -1,3 +1,3 @@
-module play-from-disk
+module clairvoyance
 
 go 1.22.7
