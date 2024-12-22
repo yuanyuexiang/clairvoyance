@@ -33,7 +33,7 @@ jobs:
       # 构建项目
       - name: 构建程序
         #run: pwd & ls -l
-        run: go build -o clairvoyance .
+        run: go build -buildvcs=false -o clairvoyance .
  
       - name: 目录文件
         run: ls -l
