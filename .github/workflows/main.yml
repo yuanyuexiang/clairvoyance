@@ -21,7 +21,7 @@ jobs:
         with:
           go-version: '1.23.3'
  
-      # 构建项目，启用静态编译以确保在 CentOS 上运行
+      # 构建项目
       - name: 构建程序
         #run: pwd & ls -l
         run: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o play-from-disk -ldflags="-s -w" .
