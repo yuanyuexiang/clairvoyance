@@ -40,6 +40,7 @@ jobs:
         run: ls -l
 
   build-2:
+    needs: build
     name: 构建镜像
     runs-on: ubuntu-latest
     container:
