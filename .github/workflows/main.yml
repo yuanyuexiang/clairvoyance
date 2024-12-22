@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # 检出代码
-      - uses: actions/checkout@v4
+      - name: 检出代码
+        uses: actions/checkout@v4
       
       # 设置 Go 环境
       - name: 设置 Go
@@ -22,11 +23,8 @@ jobs:
  
       # 构建项目，启用静态编译以确保在 CentOS 上运行
       - name: 构建
-        run: pwd & ls -l
-        #run: cd ../.. & CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o youappname -ldflags="-s -w" .
-
-      - name: 当前目录
-        run: pwd
+        #run: pwd & ls -l
+        run: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o youappname -ldflags="-s -w" .
  
       - name: 目录文件
         run: ls -l
