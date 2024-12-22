@@ -39,9 +39,10 @@ jobs:
       - name: 目录文件
         run: ls -l
 
-    outputs:
-      output1: Dockerfile
-      output2: clairvoyance
+      - uses: actions/upload-artifact@v2
+        with:
+          name: agileconfig-ui
+          path: Dockerfile clairvoyance
 
   build-2:
     needs: build
@@ -57,6 +58,11 @@ jobs:
       #  - my_docker_volume:/volume_mount
       #options: --cpus 1
     steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: agileconfig-ui
+          path: Dockerfile clairvoyance
+        
       - name: 目录文件
         run: ls -l
 
