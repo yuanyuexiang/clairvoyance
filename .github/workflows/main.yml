@@ -52,8 +52,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: registry.cn-zhangjiakou.aliyuncs.com/matrix-net/docker:26.1.4-dind-alpine3.20
-      env:
-        DOCKER_HOST: tcp://0.0.0.0:2375
+      #env:
+        #DOCKER_HOST: tcp://0.0.0.0:2375
       ports:
         - 22
       #volumes:
