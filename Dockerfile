@@ -5,6 +5,7 @@ ENV TZ='Asia/Shanghai'
 
 WORKDIR /matrix
 
+RUN ls -l
 COPY ./play-from-disk ./
 RUN chmod +x /matrix/play-from-disk
 CMD ["/matrix/play-from-disk"]
