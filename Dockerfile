@@ -6,7 +6,5 @@ ENV TZ='Asia/Shanghai'
 WORKDIR /matrix
 
 COPY ./play-from-disk ./
-COPY ./swagger ./swagger
-COPY ./conf/app-prd.conf    ./conf/app.conf
 RUN chmod +x /matrix/play-from-disk
 CMD ["/matrix/play-from-disk"]
