@@ -9,6 +9,7 @@ on:
  
 jobs:
   build:
+    name: 编译Go程序
     runs-on: ubuntu-latest
     container:
       image: registry.cn-zhangjiakou.aliyuncs.com/matrix-net/golang-build:1.22.5-bullseye-2
@@ -35,6 +36,22 @@ jobs:
         #run: pwd & ls -l
         run: go build -buildvcs=false -o clairvoyance .
  
+      - name: 目录文件
+        run: ls -l
+
+  build-2:
+    name: 构建镜像
+    runs-on: ubuntu-latest
+    container:
+      image: registry.cn-zhangjiakou.aliyuncs.com/matrix-net/docker:26.1.4-dind-alpine3.20
+      env:
+        DOCKER_HOST: tcp://0.0.0.0:2375
+      ports:
+        - 22
+      #volumes:
+      #  - my_docker_volume:/volume_mount
+      #options: --cpus 1
+    steps:
       - name: 目录文件
         run: ls -l
 
