@@ -42,6 +42,7 @@ jobs:
           ssh-keyscan -H 47.109.69.39 >> ~/.ssh/known_hosts
           #cat ~/.ssh/known_hosts
           #export DOCKER_HOST=ssh://root@47.109.69.39
+          ssh remote-docker
 
           # 创建 Docker Context
           docker context create remote --docker "host=ssh://remote-docker"
