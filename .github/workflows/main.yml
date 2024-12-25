@@ -100,12 +100,21 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ vars.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+
+          echo "
+          Host remote-docker
+              HostName 47.109.69.39
+              User root
+              IdentityFile ~/.ssh/id_rsa
+              StrictHostKeyChecking no
+          " > ~/.ssh/config
+
           ssh-keyscan -H 47.109.69.39 >> ~/.ssh/known_hosts
-          export DOCKER_HOST=ssh://root@47.109.69.39
+          #export DOCKER_HOST=ssh://root@47.109.69.39
 
           # 创建 Docker Context
-          #docker context create remote-docker --docker "host=ssh://root@47.109.69.39"
-          #docker context use remote-docker
+          docker context create remote --docker "host=ssh://remote-docker"
+          docker context use remote
           cat ~/.ssh/id_rsa
           docker ps
   
