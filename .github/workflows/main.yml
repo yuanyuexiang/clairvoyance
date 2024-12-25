@@ -21,14 +21,6 @@ jobs:
       #  - my_docker_volume:/volume_mount
       #options: --cpus 1
     steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: agileconfig-ui
-          #path: Dockerfile clairvoyance
-        
-      - name: 目录文件
-        run: ls -l
-
       - name: Set up SSH for Docker Context
         run: |
           # 创建 SSH 配置和密钥
