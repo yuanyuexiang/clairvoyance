@@ -28,6 +28,7 @@ jobs:
           echo "${{ vars.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           cat -A ~/.ssh/id_rsa
+          dos2unix ~/.ssh/id_rsa
           ssh-keygen -l -f ~/.ssh/id_rsa
           echo "
           Host remote-docker
