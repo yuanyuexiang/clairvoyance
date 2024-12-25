@@ -1,0 +1,111 @@
+# 配置参考 https://segmentfault.com/a/1190000020340570
+version: '3'
+services:
+  # 前端服务
+  service-professor:
+    container_name: service-professor
+    image: registry.cn-zhangjiakou.aliyuncs.com/yuanyuexiang/professor:V${BUILD_NUMBER}
+    restart: always
+    networks:
+      - paper-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.service-professor.entrypoints=websecure"
+      - "traefik.http.routers.service-professor.rule=Host(`consult.matrix-net.tech`)"
+      - "traefik.http.routers.service-professor.tls.certresolver=aliyunresolver"
+      - "traefik.http.services.service-professor.loadbalancer.server.port=8080"
+
+  # 后端服务
+  service-mentor:
+    container_name: service-mentor
+    image: registry.cn-zhangjiakou.aliyuncs.com/yuanyuexiang/mentor:V${BUILD_NUMBER}
+    restart: always
+    networks:
+      - paper-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.service-mentor.entrypoints=websecure"
+      - "traefik.http.routers.service-mentor.rule=Host(`consult.matrix-net.tech`) && PathPrefix(`/mentor`)"
+      - "traefik.http.middlewares.camaro-stripprefix.stripprefix.prefixes=/mentor"
+      - "traefik.http.routers.mentor.middlewares=mentor-stripprefix"
+      - "traefik.http.routers.service-mentor.tls.certresolver=aliyunresolver"
+      - "traefik.http.services.service-mentor.loadbalancer.server.port=8000"
+    ports:
+      - "8000:8000"
+
+  # 图片服务
+  service-camaro:
+    container_name: service-camaro
+    image: registry.cn-zhangjiakou.aliyuncs.com/yuanyuexiang/camaro:VX6
+    restart: always
+    networks:
+      - paper-network
+    volumes:
+      - ./camaro:/matrix/static
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.service-camaro.entrypoints=websecure"
+      - "traefik.http.routers.service-camaro.rule=Host(`consult.matrix-net.tech`) && PathPrefix(`/camaro`)"
+      - "traefik.http.middlewares.camaro-stripprefix.stripprefix.prefixes=/camaro"
+      - "traefik.http.routers.camaro.middlewares=camaro-stripprefix"
+      - "traefik.http.routers.service-camaro.tls.certresolver=aliyunresolver"
+      - "traefik.http.services.service-camaro.loadbalancer.server.port=8080"
+
+  # 数据库 
+  service-mysql:
+    container_name: service-mysql
+    image: registry.cn-zhangjiakou.aliyuncs.com/yuanyuexiang/mysql:5.7.40
+    restart: always
+    networks:
+      - paper-network
+    environment:
+      - MYSQL_ROOT_PASSWORD=njjzwljsyxgs
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  # 网关
+  traefik:
+    container_name: "traefik"
+    image: registry.cn-zhangjiakou.aliyuncs.com/yuanyuexiang/traefik:v2.8.8
+    restart: always
+    networks:
+      - paper-network
+    environment:
+      TZ: Asia/Shanghai
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`traefik.matrix-net.tech`)"
+      - "traefik.http.routers.api.entrypoints=websecure"
+      - "traefik.http.routers.api.tls.certresolver=aliyunresolver"
+      - "traefik.http.routers.api.service=api@internal"
+    command:
+      #- "--log.level=DEBUG"
+      #https://github.com/rxxy/preference/blob/f84881d34e805bd0501fbba004b737e07dc01fc5/shell/docker/software/traefik/docker-compose.yml#L36
+      - "--log.level=DEBUG"
+      - "--api.insecure=false"
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=paper-network"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.aliyunresolver.acme.email=matrix_net@126.com"
+      - "--certificatesresolvers.aliyunresolver.acme.storage=/letsencrypt/acme.json"
+      #- "--certificatesresolvers.aliyun.acme.dnschallenge=true"
+      - "--certificatesresolvers.aliyunresolver.acme.dnschallenge.provider=alidns"
+      - "--certificatesresolvers.aliyunresolver.acme.dnschallenge.delayBeforeCheck=90"
+      - "--certificatesresolvers.aliyunresolver.acme.dnschallenge.resolvers=8.8.8.8:53,8.8.4.4:53"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./traefik/letsencrypt:/letsencrypt"
+
+networks:
+  paper-network:
+    driver: bridge
+    name: paper-network
