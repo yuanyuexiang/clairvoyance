@@ -37,7 +37,7 @@ jobs:
               User root
               IdentityFile ~/.ssh/id_rsa
           " > ~/.ssh/config
-
+          cat ~/.ssh/config
           ssh-keyscan -H 47.109.69.39 >> ~/.ssh/known_hosts
           #cat ~/.ssh/known_hosts
           #export DOCKER_HOST=ssh://root@47.109.69.39
