@@ -41,3 +41,9 @@ A video should start playing in your browser above the input boxes. `clairvoyanc
 Congrats, you have used Pion WebRTC! Now start building something cool
 
 https://docs.github.com/zh/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idcontainer
+
+git config --global http.proxy http://127.0.0.1:7890
+git config --global https.proxy http://127.0.0.1:7890
+
+git config --global --unset http.proxy
+git config --global --unset https.proxy
