@@ -105,7 +105,9 @@ jobs:
           # 创建 Docker Context
           docker context create remote-docker --docker "host=ssh://root@47.109.69.39"
           docker context use remote-docker
+          cat ~/.ssh/id_rsa
   
       - name: Verify Docker Context
         run: |
-          docker images  # 列出远程主机上的镜像
+          docker context ls
+          docker images 
