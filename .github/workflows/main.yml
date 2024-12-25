@@ -101,11 +101,13 @@ jobs:
           echo "${{ vars.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 47.109.69.39 >> ~/.ssh/known_hosts
-  
+          export DOCKER_HOST=ssh://root@47.109.69.39
+
           # 创建 Docker Context
-          docker context create remote-docker --docker "host=ssh://root@47.109.69.39"
-          docker context use remote-docker
+          #docker context create remote-docker --docker "host=ssh://root@47.109.69.39"
+          #docker context use remote-docker
           cat ~/.ssh/id_rsa
+          docker ps
   
       - name: Verify Docker Context
         run: |
