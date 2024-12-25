@@ -27,7 +27,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ vars.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-
+          ssh-keygen -l -f ~/.ssh/id_rsa
           echo "
           Host remote-docker
               HostName 47.109.69.39
