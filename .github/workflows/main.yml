@@ -43,6 +43,7 @@ jobs:
           #export DOCKER_HOST=ssh://root@47.109.69.39
           #ssh root@47.109.69.39
           #ssh remote-docker
+          docker version
 
           # 创建 Docker Context
           #docker context create remote --docker "host=ssh://47.109.69.39"
