@@ -98,7 +98,7 @@ jobs:
         run: |
           # 创建 SSH 配置和密钥
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ vars.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 47.109.69.39 >> ~/.ssh/known_hosts
   
