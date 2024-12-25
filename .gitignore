@@ -29,3 +29,6 @@ output.ivf
 output.ogg
 sdp.txt
 clairvoyance
+.github/workflows/main.yml
+github-actions-docker-key
+github-actions-docker-key.pub
