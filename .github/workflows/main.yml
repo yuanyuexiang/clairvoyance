@@ -36,6 +36,7 @@ jobs:
               HostName 47.109.69.39
               User root
               IdentityFile ~/.ssh/id_rsa
+              StrictHostKeyChecking=no
           " > ~/.ssh/config
 
           cat -A ~/.ssh/config
@@ -52,7 +53,7 @@ jobs:
           ssh-keyscan -H 47.109.69.39 >> ~/.ssh/known_hosts
           echo "-------------1.6-------------------"
           # 测试 SSH
-          ssh -o StrictHostKeyChecking=no remote-docker echo "SSH connection successful"
+          ssh -o remote-docker echo "SSH connection successful"
           echo "-------------2-------------------"
           
 
