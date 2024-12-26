@@ -38,6 +38,8 @@ jobs:
               IdentityFile ~/.ssh/id_rsa
           " > ~/.ssh/config
 
+          cat -A ~/.ssh/config
+          echo "------------0--------------------"
            # 静态解析主机名
           echo "47.109.69.39 remote-docker" >> /etc/hosts
 
