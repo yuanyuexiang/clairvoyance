@@ -108,7 +108,7 @@ jobs:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
           #tags: ${{ steps.meta.outputs.tags }}
-          tags: V${{ needs.build-compile.outputs.formatted_timestamp }}
+          tags: v${{ needs.build-compile.outputs.formatted_timestamp }}
           annotations: ${{ steps.meta.outputs.annotations }}
           provenance: true
           sbom: true
