@@ -75,11 +75,11 @@ jobs:
       - name: 目录文件
         run: ls -l
 
-      # 使用时间戳
-      - name: Print timestamp
-        run: |
-          echo "Unix Timestamp: ${{ steps.get_timestamp.outputs.timestamp }}"
-          echo "Formatted Timestamp: ${{ steps.get_timestamp.outputs.formatted_timestamp }}"
+      # # 使用时间戳
+      # - name: Print timestamp
+      #   run: |
+      #     echo "Unix Timestamp: ${{ steps.get_timestamp.outputs.timestamp }}"
+      #     echo "Formatted Timestamp: ${{ steps.get_timestamp.outputs.formatted_timestamp }}"
 
       - name: 指定仓库名称
         id: meta
