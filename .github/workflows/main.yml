@@ -40,6 +40,10 @@ jobs:
 
            # 静态解析主机名
           echo "47.109.69.39 remote-docker" >> /etc/hosts
+
+          cat /etc/hosts
+
+          echo "--------------------------------"
           
           # 添加远程主机到 known_hosts
           ssh-keyscan -H 47.109.69.39 >> ~/.ssh/known_hosts
