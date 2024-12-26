@@ -44,12 +44,15 @@ jobs:
           cat /etc/hosts
 
           echo "--------------------------------"
-          
+          ssh-keygen -l -f ~/.ssh/id_rsa
+          echo "-------------1.5-------------------"
           # 添加远程主机到 known_hosts
           ssh-keyscan -H 47.109.69.39 >> ~/.ssh/known_hosts
           
           # 测试 SSH
           ssh -o StrictHostKeyChecking=no remote-docker echo "SSH connection successful"
+          echo "-------------2-------------------"
+          
 
           #cat ~/.ssh/known_hosts
           #export DOCKER_HOST=ssh://root@47.109.69.39
