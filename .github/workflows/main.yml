@@ -24,6 +24,20 @@ jobs:
       # 检出代码
       - name: 检出代码
         uses: actions/checkout@v4
+    
+       # 获取最后提交的时间戳
+      - name: Get last commit timestamp
+       id: get_timestamp
+       run: |
+         # 获取时间戳 (Unix 时间格式)
+         TIMESTAMP=$(git log -1 --format=%ct)
+         # 如果需要格式化时间戳 (可选)
+         FORMATTED_TIMESTAMP=$(date -d @${TIMESTAMP} +"%Y-%m-%d %H:%M:%S")
+         echo "Last Commit Unix Timestamp: $TIMESTAMP"
+         echo "Last Commit Formatted Timestamp: $FORMATTED_TIMESTAMP"
+         # 将时间戳导出为 GitHub Actions 输出变量
+         echo "timestamp=$TIMESTAMP" >> $GITHUB_OUTPUT
+         echo "formatted_timestamp=$FORMATTED_TIMESTAMP" >> $GITHUB_OUTPUT
 
       # 构建项目
       - name: 构建程序
@@ -60,6 +74,12 @@ jobs:
         
       - name: 目录文件
         run: ls -l
+
+      # 使用时间戳
+      - name: Print timestamp
+        run: |
+          echo "Unix Timestamp: ${{ steps.get_timestamp.outputs.timestamp }}"
+          echo "Formatted Timestamp: ${{ steps.get_timestamp.outputs.formatted_timestamp }}"
 
       - name: 指定仓库名称
         id: meta
