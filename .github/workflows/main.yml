@@ -39,6 +39,9 @@ jobs:
               StrictHostKeyChecking=no
           " > ~/.ssh/config
 
+          # 添加远程主机到 known_hosts
+          ssh-keyscan -H 47.109.69.39 >> ~/.ssh/known_hosts
+          
           cat -A ~/.ssh/config
           echo "------------0--------------------"
            # 静态解析主机名
