@@ -44,7 +44,7 @@ jobs:
   # 打包镜像
   build-package:
     needs: build-compile
-    name: 构建镜像
+    name: 构建
     runs-on: ubuntu-latest
     container:
       image: registry.cn-zhangjiakou.aliyuncs.com/matrix-net/docker:26.1.4-dind-alpine3.20
