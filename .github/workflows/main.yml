@@ -53,7 +53,7 @@ jobs:
           ssh-keyscan -H 47.109.69.39 >> ~/.ssh/known_hosts
           echo "-------------1.6-------------------"
           # 测试 SSH
-          ssh -o remote-docker echo "SSH connection successful"
+          ssh remote-docker echo "SSH connection successful"
           echo "-------------2-------------------"
           
 
