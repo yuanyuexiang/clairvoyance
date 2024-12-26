@@ -30,6 +30,7 @@ jobs:
         id: get_timestamp
         run: |
           # 获取时间戳 (Unix 时间格式)
+          git config --global --add safe.directory $GITHUB_WORKSPACE
           TIMESTAMP=$(git log -1 --format=%ct)
           # 如果需要格式化时间戳 (可选)
           FORMATTED_TIMESTAMP=$(date -d @${TIMESTAMP} +"%Y-%m-%d %H:%M:%S")
