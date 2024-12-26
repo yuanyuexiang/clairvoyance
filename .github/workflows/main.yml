@@ -36,7 +36,8 @@ jobs:
           git config --global --add safe.directory $GITHUB_WORKSPACE
           TIMESTAMP=$(git log -1 --format=%ct)
           # 如果需要格式化时间戳 (可选)
-          FORMATTED_TIMESTAMP=$(date -d @${TIMESTAMP} +"%Y-%m-%d %H:%M:%S")
+          #FORMATTED_TIMESTAMP=$(date -d @${TIMESTAMP} +"%Y-%m-%d %H:%M:%S")
+          FORMATTED_TIMESTAMP=$(date -d @${TIMESTAMP} +"%Y%m%d%H%M%S")
           echo "Last Commit Unix Timestamp: $TIMESTAMP"
           echo "Last Commit Formatted Timestamp: $FORMATTED_TIMESTAMP"
           # 将时间戳导出为 GitHub Actions 输出变量
@@ -106,7 +107,8 @@ jobs:
           file: ./Dockerfile
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
+          #tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ needs.build-compile.outputs.formatted_timestamp }}
           annotations: ${{ steps.meta.outputs.annotations }}
           provenance: true
           sbom: true
